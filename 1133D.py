@@ -1,21 +1,34 @@
-from fractions import Fraction
-n=input()
-a=map(int,raw_input().split())
-b=map(int,raw_input().split())
-d={}
-mx=0
-z=0
-for i in range(len(a)):
-	if a[i]==0 and b[i]==0:
-		z+=1
-	elif a[i]==0:
-		pass
+def g(n):
+	s=''
+	for i in range(n):
+		if i%2==0:
+			s+='B'
+		else:
+			s+='W'
+	return s
+for _ in range(input()):
+	n,m=map(int,raw_input().split())
+	if m%2==1:
+		s=g(m)
+		for i in range(n):
+			if i==1:
+				print s[0:n-1]+'W'
+			else:
+				print s
 	else:
-		try:
-			d[Fraction(-b[i],a[i])]+=1
-			mx=max(d[Fraction(-b[i],a[i])],mx)
-		except KeyError:
-			d[Fraction(-b[i],a[i])]=1
-			mx=max(d[Fraction(-b[i],a[i])],mx)
-print mx+z
-			
+		s='B'*(m)
+		k='W'*(m)
+		if n%2==0:
+			for i in range(n-1):
+				if i%2==0:
+					print s
+				else:
+					print k
+			print k[0:m-1]+'B'
+		else:
+			for i in range(n-1):
+				if i%2==0:
+					print k
+				else:
+					print s
+			print k[0:m-1]+'B'
